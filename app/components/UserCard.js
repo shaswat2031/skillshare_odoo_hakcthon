@@ -16,10 +16,25 @@ export default function UserCard({
     <div className="bg-white rounded-lg border border-gray-200 p-6 hover:shadow-md transition-shadow">
       <div className="flex items-start justify-between">
         <div className="flex items-center space-x-4">
-          <div className="w-16 h-16 bg-gray-300 rounded-full flex items-center justify-center">
-            <span className="text-gray-600 font-medium text-lg">
-              {user.name.charAt(0).toUpperCase()}
-            </span>
+          <div className="w-16 h-16 bg-gray-300 rounded-full overflow-hidden flex items-center justify-center">
+            {user.profilePhoto ? (
+              <img
+                src={user.profilePhoto}
+                alt={user.name}
+                className="w-full h-full object-cover"
+                onError={(e) => {
+                  e.target.onerror = null;
+                  e.target.src = "/placeholder-avatar.svg";
+                  e.target.parentElement.innerHTML = `<span class="text-gray-600 font-medium text-lg">${user.name
+                    .charAt(0)
+                    .toUpperCase()}</span>`;
+                }}
+              />
+            ) : (
+              <span className="text-gray-600 font-medium text-lg">
+                {user.name.charAt(0).toUpperCase()}
+              </span>
+            )}
           </div>
           <div className="flex-1">
             <h3 className="text-lg font-semibold text-gray-900">{user.name}</h3>

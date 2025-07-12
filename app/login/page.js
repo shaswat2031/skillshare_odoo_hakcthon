@@ -2,12 +2,18 @@
 import { useState } from "react";
 import { useRouter } from "next/navigation";
 import Header from "../components/Header";
+import Notification from "../components/Notification";
 
 export default function LoginPage() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState("");
+  const [notification, setNotification] = useState({
+    show: false,
+    message: "",
+    type: "success",
+  });
   const router = useRouter();
 
   const handleSubmit = async (e) => {
@@ -30,10 +36,24 @@ export default function LoginPage() {
         // Save user to localStorage
         localStorage.setItem("currentUser", JSON.stringify(data.user));
 
-        // Redirect to home page
-        router.push("/");
+        // Show success notification
+        setNotification({
+          show: true,
+          message: "Login successful! Redirecting...",
+          type: "success",
+        });
+
+        // Redirect to home page after a short delay
+        setTimeout(() => {
+          router.push("/");
+        }, 1500);
       } else {
         setError(data.error || "Login failed");
+        setNotification({
+          show: true,
+          message: data.error || "Login failed",
+          type: "error",
+        });
       }
     } catch (error) {
       console.error("Login error:", error);
@@ -46,6 +66,10 @@ export default function LoginPage() {
   return (
     <div className="min-h-screen bg-gray-50">
       <Header />
+
+      {notification.show && (
+        <Notification message={notification.message} type={notification.type} />
+      )}
 
       <div className="flex items-center justify-center py-12 px-4 sm:px-6 lg:px-8">
         <div className="max-w-md w-full">
@@ -115,6 +139,18 @@ export default function LoginPage() {
               </a>
             </div>
 
+            <div className="mt-6 text-center">
+              <p className="text-sm text-gray-600">
+                Don't have an account?{" "}
+                <a
+                  href="/register"
+                  className="text-blue-600 hover:text-blue-800 font-medium"
+                >
+                  Register
+                </a>
+              </p>
+            </div>
+
             <div className="mt-8 text-center">
               <a
                 href="/"
@@ -122,17 +158,6 @@ export default function LoginPage() {
               >
                 Home
               </a>
-            </div>
-
-            <div className="mt-4 p-4 bg-gray-100 rounded-md">
-              <p className="text-sm text-gray-600 mb-2">Demo credentials:</p>
-              <p className="text-xs text-gray-500">
-                Email: marc@demo.com, Password: password123
-                <br />
-                Email: michell@demo.com, Password: password123
-                <br />
-                Email: joe@demo.com, Password: password123
-              </p>
             </div>
           </div>
         </div>

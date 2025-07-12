@@ -6,7 +6,8 @@ export let users = [
     email: "marc@demo.com",
     password: "password123",
     location: "New York",
-    profilePhoto: "/placeholder-avatar.jpg",
+    profilePhoto:
+      "https://media.licdn.com/dms/image/v2/D4D35AQGldyGFt9eTTQ/profile-framedphoto-shrink_400_400/profile-framedphoto-shrink_400_400/0/1713505188553?e=1752926400&v=beta&t=P_HxnQ79lVKPIhv5gm8dK7mU4RKHA5WR0lcU9QPS_Dk",
     skillsOffered: ["React", "Node.js", "JavaScript"],
     skillsWanted: ["Python", "Machine Learning"],
     availability: "weekends",
@@ -19,7 +20,8 @@ export let users = [
     email: "michell@demo.com",
     password: "password123",
     location: "San Francisco",
-    profilePhoto: "/placeholder-avatar.jpg",
+    profilePhoto:
+      "https://media.licdn.com/dms/image/v2/D4D35AQGldyGFt9eTTQ/profile-framedphoto-shrink_400_400/profile-framedphoto-shrink_400_400/0/1713505188553?e=1752926400&v=beta&t=P_HxnQ79lVKPIhv5gm8dK7mU4RKHA5WR0lcU9QPS_Dk",
     skillsOffered: ["Python", "Data Science"],
     skillsWanted: ["React", "Frontend"],
     availability: "evenings",
@@ -32,7 +34,7 @@ export let users = [
     email: "joe@demo.com",
     password: "password123",
     location: "Chicago",
-    profilePhoto: "/placeholder-avatar.jpg",
+    profilePhoto: "/placeholder-avatar.svg",
     skillsOffered: ["Java", "Spring", "AWS"],
     skillsWanted: ["DevOps", "Docker"],
     availability: "weekdays",

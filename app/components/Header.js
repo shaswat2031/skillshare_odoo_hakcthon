@@ -35,9 +35,13 @@ export default function Header({ currentUser, onLogout }) {
                 </a>
                 <div className="flex items-center space-x-3">
                   <img
-                    src="/placeholder-avatar.jpg"
+                    src={currentUser.profilePhoto || "/placeholder-avatar.svg"}
                     alt="Profile"
-                    className="w-8 h-8 rounded-full bg-gray-300"
+                    className="w-8 h-8 rounded-full bg-gray-300 object-cover"
+                    onError={(e) => {
+                      e.target.onerror = null;
+                      e.target.src = "/placeholder-avatar.svg";
+                    }}
                   />
                   <span className="text-sm font-medium text-gray-700">
                     {currentUser.name}
@@ -51,12 +55,20 @@ export default function Header({ currentUser, onLogout }) {
                 </div>
               </>
             ) : (
-              <a
-                href="/login"
-                className="bg-blue-600 text-white px-4 py-2 rounded-md text-sm font-medium hover:bg-blue-700"
-              >
-                Login
-              </a>
+              <div className="flex items-center space-x-4">
+                <a
+                  href="/login"
+                  className="bg-blue-600 text-white px-4 py-2 rounded-md text-sm font-medium hover:bg-blue-700"
+                >
+                  Login
+                </a>
+                <a
+                  href="/register"
+                  className="border border-blue-600 text-blue-600 px-4 py-2 rounded-md text-sm font-medium hover:bg-blue-100"
+                >
+                  Register
+                </a>
+              </div>
             )}
           </nav>
         </div>

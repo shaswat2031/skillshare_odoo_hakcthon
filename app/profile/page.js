@@ -7,6 +7,7 @@ export default function ProfilePage() {
   const [formData, setFormData] = useState({
     name: "",
     location: "",
+    profilePhoto: "",
     skillsOffered: [],
     skillsWanted: [],
     availability: "",
@@ -25,6 +26,7 @@ export default function ProfilePage() {
       setFormData({
         name: user.name || "",
         location: user.location || "",
+        profilePhoto: user.profilePhoto || "/placeholder-avatar.svg",
         skillsOffered: user.skillsOffered || [],
         skillsWanted: user.skillsWanted || [],
         availability: user.availability || "",
@@ -119,6 +121,7 @@ export default function ProfilePage() {
       setFormData({
         name: currentUser.name || "",
         location: currentUser.location || "",
+        profilePhoto: currentUser.profilePhoto || "/placeholder-avatar.svg",
         skillsOffered: currentUser.skillsOffered || [],
         skillsWanted: currentUser.skillsWanted || [],
         availability: currentUser.availability || "",
@@ -326,6 +329,36 @@ export default function ProfilePage() {
                     <option value="private">Private</option>
                   </select>
                 </div>
+              </div>
+
+              <div>
+                <label className="block text-sm font-medium text-gray-700 mb-2">
+                  Profile Photo URL
+                </label>
+                <input
+                  type="url"
+                  name="profilePhoto"
+                  value={formData.profilePhoto}
+                  onChange={handleInputChange}
+                  placeholder="https://example.com/your-photo.jpg"
+                  className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
+                />
+                {formData.profilePhoto && (
+                  <div className="mt-2 flex items-center">
+                    <img
+                      src={formData.profilePhoto}
+                      alt="Profile Preview"
+                      className="w-10 h-10 rounded-full object-cover"
+                      onError={(e) => {
+                        e.target.onerror = null;
+                        e.target.src = "/placeholder-avatar.svg";
+                      }}
+                    />
+                    <span className="ml-2 text-xs text-gray-500">
+                      Preview (if image URL is valid)
+                    </span>
+                  </div>
+                )}
               </div>
             </div>
 
